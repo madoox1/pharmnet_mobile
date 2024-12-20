@@ -3,6 +3,7 @@ class User {
   final String nom;
   final String prenom;
   final String email;
+  final String password; // Ajout du champ password
   final String role;
   final String adresse;
 
@@ -11,6 +12,7 @@ class User {
     required this.nom,
     required this.prenom,
     required this.email,
+    required this.password, // Ajout du champ password dans le constructeur
     required this.role,
     required this.adresse,
   });
@@ -21,6 +23,7 @@ class User {
       nom: json['nom'],
       prenom: json['prenom'],
       email: json['email'],
+      password: json['motDePasse'], // Conversion du champ motDePasse en password
       role: json['role'],
       adresse: json['adresse'],
     );
@@ -32,6 +35,7 @@ class User {
       'nom': nom,
       'prenom': prenom,
       'email': email,
+      'motDePasse': password, // Conversion du champ password en motDePasse
       'role': role,
       'adresse': adresse,
     };

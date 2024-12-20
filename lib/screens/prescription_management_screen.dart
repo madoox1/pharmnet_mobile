@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pharmnet_mobile/screens/prescription_image_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:logging/logging.dart';
+import 'package:logging/logging.dart'; // Ajout de l'import logging
 import '../services/prescription_service.dart';
 import '../services/auth_state.dart';
 import '../models/prescription.dart';
@@ -245,7 +245,7 @@ class _PrescriptionManagementScreenState
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Ordonnance #${prescription.id}',
+                              'Ordonnance #${prescription.id.toString()}', // Assurez-vous de convertir en String
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,

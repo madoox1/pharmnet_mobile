@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../services/prescription_service.dart';
 
 class CreatePrescriptionScreen extends StatefulWidget {
   final int pharmacyId;
@@ -14,6 +15,7 @@ class CreatePrescriptionScreen extends StatefulWidget {
 }
 
 class _CreatePrescriptionScreenState extends State<CreatePrescriptionScreen> {
+  final PrescriptionService _prescriptionService = PrescriptionService();
   bool _isLoading = false;
   String? _error;
 
@@ -40,80 +42,38 @@ class _CreatePrescriptionScreenState extends State<CreatePrescriptionScreen> {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               if (_error != null)
-                Container(
-                  margin: const EdgeInsets.only(bottom: 20),
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.red[50],
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.red[200]!),
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(Icons.error_outline, color: Colors.red[700]),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Text(
-                          _error!,
-                          style: TextStyle(color: Colors.red[700]),
-                        ),
-                      ),
-                    ],
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Text(
+                    _error!,
+                    style: const TextStyle(color: Colors.red),
+                    textAlign: TextAlign.center,
                   ),
                 ),
               Expanded(
                 child: Card(
-                  elevation: 8,
-                  shadowColor: Colors.green.withOpacity(0.2),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
                   child: InkWell(
                     onTap: _handlePrescriptionSubmission,
-                    borderRadius: BorderRadius.circular(20),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: Colors.green.withOpacity(0.2),
-                          width: 2,
-                        ),
-                      ),
+                    child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            padding: const EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                              color: Colors.green[50],
-                              shape: BoxShape.circle,
-                            ),
-                            child: Icon(
-                              Icons.upload_file,
-                              size: 64,
-                              color: Colors.green[700],
-                            ),
+                          Icon(
+                            Icons.upload_file,
+                            size: 64,
+                            color: Colors.green[700],
                           ),
-                          const SizedBox(height: 24),
+                          const SizedBox(height: 16),
                           Text(
-                            'Cliquez pour ajouter une ordonnance',
+                            'Ajouter une ordonnance',
                             style: TextStyle(
                               color: Colors.green[700],
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 12),
-                          Text(
-                            'Format accepté: JPG, PNG, PDF',
-                            style: TextStyle(
-                              color: Colors.grey[600],
-                              fontSize: 14,
+                              fontSize: 16,
                             ),
                           ),
                         ],
@@ -122,40 +82,27 @@ class _CreatePrescriptionScreenState extends State<CreatePrescriptionScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: _isLoading ? null : _handlePrescriptionSubmission,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green[700],
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  elevation: 4,
                 ),
                 child: _isLoading
                     ? const SizedBox(
-                        height: 24,
-                        width: 24,
+                        height: 20,
+                        width: 20,
                         child: CircularProgressIndicator(
                           strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.white),
                         ),
                       )
-                    : const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.upload),
-                          SizedBox(width: 12),
-                          Text(
-                            'Envoyer l\'ordonnance',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
+                    : const Text('Envoyer l\'ordonnance'),
               ),
             ],
           ),
