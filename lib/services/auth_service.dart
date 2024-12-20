@@ -2,12 +2,14 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class AuthService {
-  static const String baseUrl = 'http://10.0.2.2:8080/pharmacy-system-backend-1.0-SNAPSHOT/api';
+  // Update the base URL to use IP address
+  static const String _baseUrl =
+      'http://10.0.2.2:8080/pharmacy-system-backend-1.0-SNAPSHOT/api';
 
   Future<Map<String, dynamic>> login(String email, String password) async {
     try {
       final response = await http.post(
-        Uri.parse('$baseUrl/login'),
+        Uri.parse('$_baseUrl/login'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           'email': email,
@@ -19,7 +21,8 @@ class AuthService {
         case 200:
           final userData = json.decode(response.body);
           if (userData['role'] != 'Patient') {
-            throw Exception('Cette application est réservée aux patients. Veuillez utiliser l\'application web.');
+            throw Exception(
+                'Cette application est réservée aux patients. Veuillez utiliser l\'application web.');
           }
           return userData;
         case 401:

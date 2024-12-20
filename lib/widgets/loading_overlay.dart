@@ -19,20 +19,13 @@ class LoadingOverlay extends StatelessWidget {
           Container(
             color: Colors.black26,
             child: Center(
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.green[700]!),
-                      ),
-                      const SizedBox(height: 16),
-                      const Text('Chargement...'),
-                    ],
-                  ),
+              child: Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
                 ),
+                child: const CircularProgressIndicator(),
               ),
             ),
           ),
