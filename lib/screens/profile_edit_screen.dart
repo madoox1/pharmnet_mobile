@@ -15,7 +15,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   final _formKey = GlobalKey<FormState>();
   final _userService = UserService();
   bool _isLoading = false;
-  String? _error;
 
   late TextEditingController _nomController;
   late TextEditingController _prenomController;
@@ -51,7 +50,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
 
     setState(() {
       _isLoading = true;
-      _error = null;
     });
 
     try {
@@ -80,7 +78,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         const SnackBar(content: Text('Profil mis à jour avec succès')),
       );
     } catch (e) {
-      setState(() => _error = e.toString());
+      setState(() => _isLoading = false);
     } finally {
       setState(() => _isLoading = false);
     }
@@ -118,7 +116,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
+                        color: Colors.black.withAlpha(26),
                         blurRadius: 20,
                         offset: const Offset(0, 5),
                       ),
